@@ -1,0 +1,21 @@
+<launch>
+
+<!--
+	<arg name="gui" default="False" />
+	<param name="robot_description"    command="$(find xacro)/xacro.py '$(find cvg_sim_gazebo)/urdf/quadrotor_sensors.urdf.xacro'" />
+	<param name="use_gui" value="False"/>
+	<node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find cvg_sim_gazebo)/rviz/ardrone.rviz" required="true" />
+-->
+	<arg name="mapfile" default="$(find cvg_sim_gazebo)/maps/3d_map.yaml"/>
+	<node name="octomap_server" pkg="octomap_server" type="octomap_server_node" args="/home/simmu/drone_ws/src/tum_simulator/cvg_sim_gazebo/maps/testing_drone.bt">
+         <param name="resolution" value="0.05" />
+	<param name="frame_id" type="string" value="map" />
+	</node>
+        <node pkg="tf" type="static_transform_publisher" name="odom_map_broadcaster" args="0 0 0 0 0 0 /map /nav 100" />
+
+
+
+</launch>
+
